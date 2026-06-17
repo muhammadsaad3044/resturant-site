@@ -12,7 +12,7 @@ function CoreFeatureCard({ feature, index }) {
       viewport={{ once: true, margin: '-70px' }}
       transition={{ duration: 0.55, delay: index * 0.07, ease: easing }}
       whileHover={{ y: -6 }}
-      className="flex min-h-100 flex-col items-center rounded-3xl bg-[#262626] px-12 py-12 text-center max-xl:min-h-95 max-xl:px-8 max-xl:pb-12 max-xl:pt-12"
+      className="core-feature-card flex min-h-100 flex-col items-center rounded-3xl bg-[#262626] px-12 py-12 text-center max-xl:min-h-95 max-xl:px-8 max-xl:pb-12 max-xl:pt-12"
     >
       <img src={clockIcon} alt="" aria-hidden="true" className="h-19.75 w-28 object-contain" />
 

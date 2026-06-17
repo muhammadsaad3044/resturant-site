@@ -13,26 +13,30 @@ import ChefSection from './components/home/ChefSection'
 import BlogSection from './components/home/BlogSection'
 import GallerySection from './components/home/GallerySection'
 import ContactStrip from './components/home/ContactStrip'
+import PageLoader from './components/ui/PageLoader'
 
 function App() {
   return (
-    <main className="texture-bg min-h-screen overflow-hidden text-white">
-      <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <PopularFoodSection />
-      <PromoBanners />
-      <WhyChooseUs />
-      <BestSellingDishes />
-      <OfferSection />
-      <CoreFeatures />
-      <Testimonials />
-      <ChefSection />
-      <BlogSection />
-      <GallerySection />
-      <ContactStrip />
-      <Footer />
-    </main>
+    <>
+      <PageLoader />
+      <main className="texture-bg min-h-screen overflow-hidden text-white">
+        <Navbar />
+        <HeroSection />
+        <AboutSection />
+        <PopularFoodSection />
+        <PromoBanners />
+        <WhyChooseUs />
+        <BestSellingDishes />
+        <OfferSection />
+        <CoreFeatures />
+        <Testimonials />
+        <ChefSection />
+        <BlogSection />
+        <GallerySection />
+        <ContactStrip />
+        <Footer />
+      </main>
+    </>
   )
 }
 

@@ -7,10 +7,10 @@ import { navLinks } from '../../constants/navigation'
 const easing = [0.22, 1, 0.36, 1]
 
 const menuVariants = {
-  hidden: { opacity: 0, y: -28, filter: 'blur(14px)' },
+  hidden: { opacity: 0, x: -34, filter: 'blur(12px)' },
   visible: {
     opacity: 1,
-    y: 0,
+    x: 0,
     filter: 'blur(0px)',
     transition: {
       duration: 0.45,
@@ -21,7 +21,7 @@ const menuVariants = {
   },
   exit: {
     opacity: 0,
-    y: -20,
+    x: -28,
     filter: 'blur(10px)',
     transition: { duration: 0.28, ease: easing },
   },
@@ -99,12 +99,18 @@ function NavLink({ link, mobile = false, onClick }) {
       onClick={onClick}
       className={
         mobile
-          ? 'group relative font-[var(--font-nav)] text-4xl font-bold uppercase tracking-[0.02em] text-white transition hover:text-[#FF7A1A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7A1A]'
+          ? 'group relative flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.035] px-5 py-4 font-[var(--font-nav)] text-[clamp(1.05rem,5vw,1.35rem)] font-semibold uppercase tracking-0 text-white transition duration-300 hover:border-[#FF7A1A]/60 hover:bg-[#FF7A1A]/12 hover:text-[#FF7A1A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7A1A]'
           // ✅ FIX: lg pe smaller font, xl pe normal
           : 'group relative py-2 font-[var(--font-nav)] text-[14px] font-medium tracking-0 text-white/95 transition duration-300 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7A1A] focus-visible:ring-offset-4 focus-visible:ring-offset-[#0A0A0A] xl:text-[17px]'
       }
     >
-      {link.label}
+      <span>{link.label}</span>
+      {mobile && (
+        <span
+          className="size-2.5 rounded-full border border-current opacity-50 transition group-hover:scale-125 group-hover:bg-current group-hover:opacity-100"
+          aria-hidden="true"
+        />
+      )}
       <span className="absolute -bottom-[2px] left-0 h-[2px] w-full origin-left scale-x-0 rounded-full bg-[#FF7A1A] transition-transform duration-300 group-hover:scale-x-100" />
     </motion.a>
   )
@@ -138,24 +144,31 @@ function MobileMenu({ isOpen, onClose }) {
       {isOpen && (
         <motion.div
           key="mobile-menu"
-          variants={menuVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed inset-0 z-40 bg-[#0A0A0A]/98 px-6 pb-10 pt-28 backdrop-blur-2xl lg:hidden"
+          className="fixed inset-0 z-40 bg-black/65 backdrop-blur-md lg:hidden"
         >
-          <motion.div variants={menuItemVariants} className="mb-12 flex justify-center">
-            <LogoMark compact />
-          </motion.div>
-
-          <motion.div className="flex flex-col items-center gap-8" role="menu" aria-label="Mobile navigation">
-            {navLinks.map((link) => (
-              <NavLink key={link.href} link={link} mobile onClick={onClose} />
-            ))}
-            <motion.div variants={menuItemVariants} className="pt-6">
-              <BookSeatButton mobile />
+          <motion.aside
+            variants={menuVariants}
+            className="flex h-full w-[min(86vw,360px)] flex-col overflow-hidden border-r border-white/10 bg-[#0A0A0A]/96 px-5 pb-6 pt-24 shadow-[22px_0_70px_rgba(0,0,0,0.5)]"
+          >
+            <motion.div variants={menuItemVariants} className="mb-5 flex items-center justify-between border-b border-white/10 pb-4">
+              <span className="font-[var(--font-nav)] text-[13px] font-bold uppercase tracking-[0.18em] text-[#FF7A1A]">
+                Menu
+              </span>
+              <span className="h-px flex-1 bg-white/10 ml-4" aria-hidden="true" />
             </motion.div>
-          </motion.div>
+
+            <motion.div className="scrollbar-hidden flex flex-1 flex-col gap-3 overflow-y-auto pr-1" role="menu" aria-label="Mobile navigation">
+              {navLinks.map((link) => (
+                <NavLink key={link.href} link={link} mobile onClick={onClose} />
+              ))}
+              <motion.div variants={menuItemVariants} className="pt-4">
+                <BookSeatButton mobile />
+              </motion.div>
+            </motion.div>
+          </motion.aside>
         </motion.div>
       )}
     </AnimatePresence>
