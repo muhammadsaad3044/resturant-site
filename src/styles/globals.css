@@ -87,3 +87,38 @@ img {
 .food-image-mask {
   mask-image: linear-gradient(#000 72%, transparent);
 }
+
+.gallery-marquee-wrap {
+  display: flex;
+  width: max-content;
+  gap: clamp(12px, 1.35vw, 18px);
+  animation: gallery-marquee 28s linear infinite;
+  will-change: transform;
+}
+
+.gallery-marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  gap: clamp(12px, 1.35vw, 18px);
+}
+
+.gallery-marquee-item {
+  /* width: clamp(180px, 21vw, 275px);
+  height: clamp(150px, 17vw, 190px); */
+}
+
+@keyframes gallery-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - clamp(6px, 0.675vw, 9px)));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-marquee-wrap {
+    animation: none;
+  }
+}

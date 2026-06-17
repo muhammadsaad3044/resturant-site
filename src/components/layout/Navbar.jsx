@@ -164,12 +164,18 @@ function MobileMenu({ isOpen, onClose }) {
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  // ✅ scroll state
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
+    return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
   return (
@@ -178,7 +184,11 @@ function Navbar() {
         initial={{ opacity: 0, y: -20, filter: 'blur(12px)' }}
         animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
         transition={{ duration: 0.8, ease: easing }}
-        className="fixed inset-x-0 top-0 z-50 font-[var(--font-nav)]"
+        className={`fixed inset-x-0 top-0 z-50 font-[var(--font-nav)] transition-all duration-500 ${
+          scrolled
+            ? 'bg-[#0a0a0a]/70 shadow-[0_8px_32px_rgba(0,0,0,0.28)] backdrop-blur-xl'
+            : 'bg-transparent'
+        }`}
       >
         <nav
           className="

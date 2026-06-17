@@ -11,7 +11,7 @@ import CoreFeatures from './components/home/CoreFeatures'
 import Testimonials from './components/home/Testimonials'
 import ChefSection from './components/home/ChefSection'
 import BlogSection from './components/home/BlogSection'
-import SubscribeSection from './components/home/SubscribeSection'
+import GallerySection from './components/home/GallerySection'
 import ContactStrip from './components/home/ContactStrip'
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
       <Testimonials />
       <ChefSection />
       <BlogSection />
-      <SubscribeSection />
+      <GallerySection />
       <ContactStrip />
       <Footer />
     </main>
