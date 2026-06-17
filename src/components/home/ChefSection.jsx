@@ -26,7 +26,7 @@ function ChefCard({ chef, index }) {
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.55, delay: index * 0.06, ease: easing }}
       whileHover={{ y: -6 }}
-      className="group relative w-full overflow-visible"
+      className="group relative w-full  overflow-visible"
     >
       <div className="overflow-hidden bg-[#1d1d1d]">
         <img
